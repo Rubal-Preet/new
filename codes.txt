@@ -1,0 +1,367 @@
+// CODE 1
+
+import java.util.Scanner;
+  class Source {
+        public static void main(String args[])
+       {
+      Scanner sc=new Scanner(System.in);
+      int m=sc.nextInt();
+      int n=sc.nextInt();
+      int a[]=new int[n];
+      for(int i=0;i<n;i++)
+      a[i]=sc.nextInt();
+      System.out.print(totalBubbleSortSwaps(a,m));
+       }
+   static int totalBubbleSortSwaps(int[] a, int M) {
+       int size = a.length;
+       int var = 0;
+       int totalSwaps = 0;
+       for(int i=0;i<M;i++)
+       {
+           for(int j=i+1;j<size;j++)
+           {
+               if(a[i]<a[j])
+               {
+                   var=a[i];
+                   a[i]=a[j];
+                   a[j]=var;
+                    totalSwaps++;
+               }
+           }
+       }
+       return totalSwaps;
+   }
+}
+
+
+//CODE 2
+
+import java.util.Scanner;
+class Source {
+   public static void insertionSortDescending(int array[]) {
+       int n = array.length;
+       for (int j = 1; j < n; j++) {
+           int key = array[j];
+           int i = j - 1;
+           while ((i > -1) && (array[i] < key)) {
+               array[i + 1] = array[i];
+               i--;
+           }
+           array[i + 1] = key;
+       }
+   }
+
+   public static void main(String[] args) {
+       Scanner scanner = new Scanner(System.in);
+       int size = scanner.nextInt();
+       int array[] = new int[size];
+       for (int i = 0; i < size; i++) {
+           array[i] = scanner.nextInt();
+       }
+
+       // Sort in descending order
+       insertionSortDescending(array);
+       for (int i : array) {
+           System.out.println(i);
+       }
+
+   }
+
+}
+
+
+//CODE 3
+import java.util.Scanner;
+
+ class Source {
+
+   public static void main(String ss[]) {
+       Scanner scanner = new Scanner(System.in);
+       int size = scanner.nextInt();
+       String firstNames[] = new String[size];
+       String lastNames[] = new String[size];
+       for (int i = 0; i < size; i++) {
+           firstNames[i] = scanner.next().toLowerCase();
+       }
+       for (int i = 0; i < size; i++) {
+           lastNames[i] = scanner.next().toLowerCase();
+       }
+      ascendingOrder(firstNames);
+      for(int i=0;i<firstNames.length;i++)
+      {
+          System.out.println(firstNames[i]);
+      }
+      descendingOrder(lastNames);
+      for(int i=0;i<lastNames.length;i++)
+      { System.out.println(lastNames[i]);
+   }
+}
+public static void ascendingOrder(String[] firstNames)
+{int n=firstNames.length;
+for(int i=1;i<n;i++)
+{
+    String key=firstNames[i];
+    int j=i-1;
+    while(j>-1 && firstNames[j].compareTo(key)>=0)
+    {
+        firstNames[j+1]=firstNames[j];
+        j=j-1;
+    }
+    firstNames[j+1]=key;
+}
+}
+public static void descendingOrder(String[] lastNames)
+{
+    int n=lastNames.length;
+    for(int i=1;i<n;i++)
+    {
+        String key=lastNames[i];
+        int j=i-1;
+        while(j>-1 && lastNames[j].compareTo(key)<0)
+        {
+            lastNames[j+1]=lastNames[j];
+            j=j-1;
+        }
+        lastNames[j+1]=key;
+    }
+}
+}
+
+//CODE 4
+import java.util.Scanner;
+import java.util.Arrays;
+public class Source {
+
+    public static int[] sort(int[] randomNumbers) {
+        return mergeSort(randomNumbers, 0, randomNumbers.length - 1);
+    }
+
+    public static int[] mergeSort(int[] numbers, int first, int last) {
+        // first denotes the starting index of the "numbers" array
+        // last denotes the ending index of the "numbers" array
+        
+        //Complete this function
+int[] ans=new int[numbers.length];
+if(first<last)
+{ int m=(first+last)/2;
+mergeSort(numbers,first,m);
+mergeSort(numbers,m+1,last);
+ans=sorting(numbers,first,last);
+    }
+    return ans;
+}
+    /// .......
+    // Write the Merge function here which uses the merge sort to sort the array in decreasing order...
+    /// .......
+public static int[] sorting(int[] numbers,int first,int last)
+{
+    int[] mergearray=new int[numbers.length];
+    int n=numbers.length;
+    for(int i=0;i<n;i++)
+    {
+        mergearray[i]=numbers[i];
+    }
+    int m=(first+last)/2;
+    int i=first;
+    int j=m+1;
+    int k=first;
+    while(i<=m && j<=last)
+    {
+        if(mergearray[i]>mergearray[j])
+        {
+            numbers[k]=mergearray[i];
+            i++;
+        }
+        else{
+            numbers[k]=mergearray[j];
+            j++;
+        }
+        k++;
+    }
+    while(i<=m)
+    {
+        numbers[k]=mergearray[i];
+        k++;
+        i++;
+    }
+    return numbers;
+}
+    public static void main(String args[]) {
+        Scanner scanner = new Scanner(System.in);
+        int size = scanner.nextInt();
+        int[] randomNumbers = new int[size];
+        for (int i = 0; i < size; i++) {
+           randomNumbers[i] = scanner.nextInt();
+       }
+        int[] sortedNumbers;
+        sortedNumbers = sort(randomNumbers);
+        System.out.println(Arrays.toString(sortedNumbers));
+    }
+}
+
+
+//CODE 5
+
+import java.util.Scanner;
+
+ class Source {
+
+   public static void quickSort(String array[], int left, int right) {
+       if (left < right) {
+           int position = partition(array, left, right);
+           quickSort(array, left, position - 1);
+           quickSort(array, position + 1, right);
+       }
+
+   }
+     //Write your code here
+     public static int partition(String a[],int l,int r)
+     {
+         String p=a[r];
+         int j=l-1;
+         for(int i=l;i<r;i++)
+         {
+             if(a[i].length()<=p.length())
+             {
+                 j++;
+                 String temp=a[j];
+                 a[j]=a[i];
+                 a[i]=temp;
+             }
+         }
+         String temp=a[j+1];
+         a[j+1]=a[r];
+         a[r]=temp;
+         return j+1;
+         }
+         public static void main(String args[])
+         {
+             Scanner sc=new Scanner(System.in);
+             int n=sc.nextInt();
+             String[] s=new String[n];
+             for(int i=0;i<n;i++)
+             {
+                 s[i]=sc.next();
+             }
+             quickSort(s,0,n-1);
+             for(String str:s)
+             {
+                 System.out.println(str);
+             }
+         }
+     }
+
+//CODE 6
+import java.util.Random;
+
+   import java.util.Arrays;
+   import java.util.Random;
+
+
+  class Source {
+      //Write your code here
+ public static void main(String args[])
+ {
+     int [] a={2,4,6,8,10,12,14,16,18,20};
+     int n=a.length;
+     int l=0;
+     int r=n-1;
+     int pivot=a[r];
+     quickSort(a,l,r);
+     for(int i=0;i<n;i++)
+     {
+         System.out.println(a[i]);
+     }
+      }
+ public static void quickSort(int[] a,int l,int r)
+ {
+     if(l<r)
+     {
+         int p=partition(a,l,r);
+         quickSort(a,l,p-1);
+         quickSort(a,p,r);
+     }
+ }
+ public static int partition(int[] a,int l,int r)
+ {
+     int pivot=a[r];
+     int i=l-1;
+     for(int j=l;j<r;j++)
+     {
+         if(a[j]>pivot)
+         {
+             i++;
+             int temp=a[j];
+             a[j]=a[i];
+             a[i]=temp;
+         }
+     }
+     int temp=a[i+1];
+     a[i+1]=a[r];
+     a[r]=temp;
+     return i+1;
+ }
+}
+
+
+//CODE 7
+
+import java.util.Scanner;
+class Source {
+
+   public static void main(String ss[]) {
+       Scanner scanner = new Scanner(System.in);
+       int sizeArray1 = scanner.nextInt();
+       int sizeArray2 = scanner.nextInt();
+       int sortedArray1[] = getArrayInput(sizeArray1, scanner);
+       int sortedArray2[] = getArrayInput(sizeArray2, scanner);
+
+       int descendingMerge[]=mergeBothInDescendingOrder(sortedArray1, sortedArray2);
+        
+       //Write your code here
+       for(int i:descendingMerge)
+       {
+           System.out.println(i);
+       }
+    }
+    public static int[] getArrayInput(int n,Scanner sc)
+    {
+        int[] a=new int[n];
+        for(int i=0;i<n;i++)
+        {
+            a[i]=sc.nextInt();
+        }
+        return a;
+    }
+    public static int[] mergeBothInDescendingOrder(int[] a,int[] b)
+    {
+    int[] c=new int[a.length+b.length];
+    int l=a.length-1;
+    int r=b.length-1;
+    int k=0;
+    while(l>=0 && r>=0)
+    {
+        if(a[l]>b[r])
+        {
+            c[k]=a[l--];
+            }
+            else
+            {
+                c[k]=b[r--];
+            }
+            k++;
+    }
+    while(l>=0)
+    {
+        c[k++]=a[l--];
+    }
+    while(r>0)
+    {
+        c[k++]=b[r--];
+    }
+    return c;
+    
+}
+}
+//CODE 8
+
